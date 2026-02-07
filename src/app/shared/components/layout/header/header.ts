@@ -1,21 +1,28 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [],
   templateUrl: './header.html',
   styleUrls: ['./header.scss'],
 })
 export class HeaderComponent {
-  menuOpen = false;
+  @Input() userName = 'Juan David Pérez';
+  @Input() userRole = 'Estudiante';
 
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
+  @Output() addClicked = new EventEmitter<void>();
+
+  get initials(): string {
+    return this.userName
+      .split(' ')
+      .filter((word) => word.length > 0)
+      .slice(0, 2)
+      .map((word) => word[0].toUpperCase())
+      .join('');
   }
 
-  closeMenu(): void {
-    this.menuOpen = false;
+  onAdd(): void {
+    this.addClicked.emit();
   }
 }

@@ -1,44 +1,25 @@
 <header class="app-header">
   <div class="header-container">
 
-    <!-- Brand -->
-    <div class="brand">
-      <span class="logo">UL</span>
-      <span class="title">Reportes</span>
+    <!-- User info -->
+    <div class="user-info">
+      <span class="avatar" aria-hidden="true">{{ initials }}</span>
+      <div class="user-details">
+        <span class="user-name">{{ userName }}</span>
+        <span class="user-role">{{ userRole }}</span>
+      </div>
     </div>
 
-    <!-- Botón menú (mobile) -->
+    <!-- Action button -->
     <button
-      class="menu-btn"
-      aria-label="Abrir menú"
-      aria-expanded="{{ menuOpen }}"
-      (click)="toggleMenu()">
-      ☰
+      class="add-btn"
+      aria-label="Agregar nuevo"
+      (click)="onAdd()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
     </button>
-
-    <!-- Navegación global -->
-    <nav class="main-nav" [class.open]="menuOpen">
-      <a
-        routerLink="/design-system"
-        routerLinkActive="active"
-        (click)="closeMenu()">
-        Design System
-      </a>
-
-      <a
-        routerLink="/reportes"
-        routerLinkActive="active"
-        (click)="closeMenu()">
-        Reportes
-      </a>
-
-      <a
-        routerLink="/configuracion"
-        routerLinkActive="active"
-        (click)="closeMenu()">
-        Configuración
-      </a>
-    </nav>
 
   </div>
 </header>
