@@ -1,44 +1,63 @@
 <header class="app-header">
   <div class="header-container">
 
-    <!-- Brand -->
+    <!-- Brand / User -->
     <div class="brand">
-      <span class="logo">UL</span>
-      <span class="title">Reportes</span>
+      <span class="avatar">{{ initials }}</span>
+
+      <div class="brand-text">
+        <span class="user-name">{{ userName }}</span>
+        <span class="user-role">{{ userRole }}</span>
+      </div>
     </div>
 
-    <!-- Botón menú (mobile) -->
-    <button
-      class="menu-btn"
-      aria-label="Abrir menú"
-      aria-expanded="{{ menuOpen }}"
-      (click)="toggleMenu()">
-      ☰
-    </button>
+    <!-- Navigation (desktop only) -->
+    <nav class="nav">
 
-    <!-- Navegación global -->
-    <nav class="main-nav" [class.open]="menuOpen">
       <a
+        class="nav-item"
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="fa-solid fa-house"></i>
+        <span>Inicio</span>
+      </a>
+
+      <a
+        class="nav-item"
+        routerLink="/worker"
+        routerLinkActive="active"
+      >
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Reportes</span>
+      </a>
+
+      <a
+        class="nav-item"
+        routerLink="/admin"
+        routerLinkActive="active"
+      >
+        <i class="fa-solid fa-user-gear"></i>
+        <span>Administración</span>
+      </a>
+
+      <a
+        class="nav-item"
         routerLink="/design-system"
         routerLinkActive="active"
-        (click)="closeMenu()">
-        Design System
+      >
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Sistema</span>
       </a>
 
-      <a
-        routerLink="/reportes"
-        routerLinkActive="active"
-        (click)="closeMenu()">
-        Reportes
-      </a>
-
-      <a
-        routerLink="/configuracion"
-        routerLinkActive="active"
-        (click)="closeMenu()">
-        Configuración
-      </a>
     </nav>
+
+    <!-- CTA -->
+    <button class="add-btn" (click)="onAdd()">
+      <i class="fa-solid fa-plus"></i>
+      <span class="btn-text">Nuevo Reporte</span>
+    </button>
 
   </div>
 </header>
