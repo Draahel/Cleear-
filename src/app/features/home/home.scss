@@ -8,10 +8,17 @@ section {
       color: #6b7280
     }
 
-    &.alerts {
+    &.alerts, &.quick-access {
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    &.quick-access{
+      .config-quick-access {
+        color: #6b7280;
+        cursor: pointer;
+      }
     }
   }
 
@@ -57,6 +64,21 @@ section {
     &.alerts {
       display: grid;
       gap: var(--spacing-m);
+    }
+
+    &.quick-access{
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+
+      .tag{
+        padding: var(--spacing-xxs) var(--spacing-xs);
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -34,16 +34,16 @@
   </div>
 </section>
 
-<section class="quick-access">
-  <div class="section-header" >
+<section>
+  <div class="section-header quick-access" >
     <h4>ACCESO RAPIDO</h4>
-    <app-button
-      icon="fa-light fa-gear"
-    />
+    <span class="config-quick-access">
+      <i class="fa-solid fa-gear"></i>
+    </span>
   </div>
-  <div class="section-body" >
+  <div class="section-body quick-access" >
     @for (tag of tags(); track $index) {
-      <span>{{tag}}</span>
+      <span class="tag" >{{tag}}</span>
     }
   </div>
 </section>
