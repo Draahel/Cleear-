@@ -12,7 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    loadComponent: () => import('./auth/login/login').then( component => component.Login ),
+    loadComponent: () => import('./features/auth/login/login').then( component => component.Login ),
     canActivate: [loginPageGuard]
   }
 ];
