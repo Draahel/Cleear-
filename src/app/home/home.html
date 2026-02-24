@@ -1,1 +1,58 @@
-<p>home works!</p>
+<section>
+  <app-search/>
+</section>
+<section>
+  <div class="section-header">
+    <h4>CONFIGURAR</h4>
+  </div>
+  <div class="section-body configuration">
+    <div class="left-items">
+      <span class="icon-gear p-xs" >
+        <i class="fa-solid fa-gear"></i>
+      </span>
+      <span class="label" >Mis preferencias</span>
+    </div>
+    <span class="chevron-icon" ><i class="fa-solid fa-angle-right"></i></span>
+  </div>
+</section>
+
+<section>
+  <div class="section-header alerts" >
+    <h4>ALERTAS</h4>
+    <app-button variant="outline" icon="fa-solid fa-plus">Agregar</app-button>
+  </div>
+  <div class="section-body alerts">
+    @for (alert of alerts(); track $index) {
+      <app-alert-cards
+        [title]="alert.title"
+        [description]="alert.description"
+        [severity]="alert.severity"
+        [count]="alert.count"
+        (click)="alert.onClick()"
+      />
+    }
+  </div>
+</section>
+
+<section class="quick-access">
+  <div class="section-header" >
+    <h4>ACCESO RAPIDO</h4>
+    <app-button
+      icon="fa-light fa-gear"
+    />
+  </div>
+  <div class="section-body" >
+    @for (tag of tags(); track $index) {
+      <span>{{tag}}</span>
+    }
+  </div>
+</section>
+
+<section class="recents" >
+  <div class="section-header" >
+    <h4>RECIENTES</h4>
+  </div>
+  <div class="section-body" >
+    <app-button>Ver todos los reportes</app-button>
+  </div>
+</section>

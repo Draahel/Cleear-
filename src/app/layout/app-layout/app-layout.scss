@@ -14,7 +14,7 @@
 
   .content {
     flex: 1 0 auto;
-    padding: var(--space-4) var(--space-3);
+    padding: var(--spacing-m);
     width: 100%;
   }
 
@@ -31,6 +31,6 @@
 // Media query para pantallas más grandes
 @media (min-width: 768px) {
   .content {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--spacing-l);
   }
 }

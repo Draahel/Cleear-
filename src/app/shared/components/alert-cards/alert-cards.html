@@ -1,0 +1,25 @@
+<div
+  class="alert-card-container p-r-m p-l-m"
+  [class]="[severity()]">
+
+  <div class="left-items">
+
+    <span class="severity-icon p-xs">
+      <i class="fa-solid" [class]="[severityIcon()]" ></i>
+    </span>
+
+    <div class="information">
+      <p class="title">{{title()}}</p>
+      <p class="description">{{description()}}</p>
+    </div>
+
+  </div>
+
+  <div class="right-items">
+    <span class="count">{{count()}}</span>
+    <span class="chevron-icon">
+      <i class="fa-solid fa-angle-right" ></i>
+    </span>
+  </div>
+
+</div>
