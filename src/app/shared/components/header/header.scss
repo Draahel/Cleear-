@@ -57,13 +57,121 @@
     color: white;
     display: grid;
     place-items: center;
+    cursor: pointer;
 
     .btn-text {
       display: none;
     }
   }
+
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    padding: 8px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface);
+    z-index: 20;
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+    flex: 1;
+    max-width: 80px;
+    cursor: pointer;
+
+    i {
+      font-size: 24px;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    &.active {
+      color: #d31219;
+      font-weight: 600;
+      background: rgba(211, 18, 25, 0.08);
+    }
+  }
+
+  .bottom-nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: #d31219;
+    border: none;
+    color: white;
+    font-size: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex: 1;
+    max-width: 80px;
+
+    i {
+      font-size: 24px;
+    }
+
+    &:hover {
+      background: #b10a0f;
+    }
+  }
 }
 
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-header {
+    .header-container {
+      padding: 12px 24px;
+    }
+
+    .brand {
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .brand-text {
+      .user-name {
+        font-size: 16px;
+      }
+    }
+
+    .bottom-nav {
+      padding: 6px 0;
+    }
+
+    .bottom-nav-item,
+    .bottom-nav-center {
+      padding: 6px 10px;
+      font-size: 11px;
+      max-width: 90px;
+
+      i {
+        font-size: 22px;
+      }
+    }
+  }
+}
 
 @media (min-width: 1024px) {
   .app-header {
@@ -123,6 +231,10 @@
         display: inline;
         font-weight: 600;
       }
+    }
+
+    .bottom-nav {
+      display: none;
     }
   }
 }

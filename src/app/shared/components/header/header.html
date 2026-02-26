@@ -60,4 +60,49 @@
     </button>
 
   </div>
+
+  <!-- Bottom Navigation (mobile and tablet only) -->
+  <nav class="bottom-nav">
+    <a
+      class="bottom-nav-item"
+      routerLink="/"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <i class="fa-solid fa-house"></i>
+      <span>Inicio</span>
+    </a>
+
+    <a
+      class="bottom-nav-item"
+      routerLink="/worker"
+      routerLinkActive="active"
+    >
+      <i class="fa-solid fa-chart-line"></i>
+      <span>Reportes</span>
+    </a>
+
+    <button class="bottom-nav-center" (click)="onAdd()">
+      <i class="fa-solid fa-plus"></i>
+      <span>Nuevo</span>
+    </button>
+
+    <a
+      class="bottom-nav-item"
+      routerLink="/task-list"
+      routerLinkActive="active"
+    >
+      <i class="fa-solid fa-list-check"></i>
+      <span>Tareas</span>
+    </a>
+
+    <a
+      class="bottom-nav-item"
+      routerLink="/admin"
+      routerLinkActive="active"
+    >
+      <i class="fa-solid fa-user-gear"></i>
+      <span>Admin</span>
+    </a>
+  </nav>
 </header>

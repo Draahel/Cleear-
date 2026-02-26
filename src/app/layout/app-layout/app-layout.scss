@@ -16,6 +16,7 @@
     flex: 1 0 auto;
     padding: var(--spacing-m);
     width: 100%;
+    padding-bottom: calc(var(--spacing-m) + 80px);
   }
 
   .footer {
@@ -28,9 +29,18 @@
   }
 }
 
-// Media query para pantallas más grandes
-@media (min-width: 768px) {
-  .content {
+// Media query para tablets
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layout .content {
     padding: var(--spacing-l);
+    padding-bottom: calc(var(--spacing-l) + 75px);
+  }
+}
+
+// Media query para pantallas más grandes
+@media (min-width: 1024px) {
+  .layout .content {
+    padding: var(--spacing-l);
+    padding-bottom: var(--spacing-l);
   }
 }
