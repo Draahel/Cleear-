@@ -57,6 +57,6 @@
   </div>
   <div class="section-body recents" >
     <app-task-list [tasks]="recentsTasks()"/>
-    <app-button variant="outline" >Ver todos los reportes</app-button>
+    <app-button variant="outline" (click)="viewTasks()" >Ver todos los reportes</app-button>
   </div>
 </section>

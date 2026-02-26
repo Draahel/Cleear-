@@ -114,4 +114,8 @@ export class Home implements OnInit{
     this.router.navigate(['/create-report'])
   }
 
+  protected viewTasks(){
+    this.router.navigate(['/task-list'])
+  }
+
 }

@@ -2,7 +2,7 @@ import { Component, input, output, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { log } from 'console';
+import { Role } from '@enums/role';
 
 
 
@@ -17,7 +17,7 @@ export class HeaderComponent {
   private router = inject(Router);
 
   userName = input.required<string>();
-  userRole = input.required<string>();
+  userRole = input.required<Role>();
 
   addClicked = output<void>();
 

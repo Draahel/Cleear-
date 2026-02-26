@@ -26,30 +26,23 @@
 
       <a
         class="nav-item"
-        routerLink="/worker"
+        routerLink="/task-list"
         routerLinkActive="active"
       >
         <i class="fa-solid fa-chart-line"></i>
         <span>Reportes</span>
       </a>
 
-      <a
-        class="nav-item"
-        routerLink="/admin"
-        routerLinkActive="active"
-      >
-        <i class="fa-solid fa-user-gear"></i>
-        <span>Administración</span>
-      </a>
-
-      <a
-        class="nav-item"
-        routerLink="/design-system"
-        routerLinkActive="active"
-      >
-        <i class="fa-solid fa-layer-group"></i>
-        <span>Sistema</span>
-      </a>
+      @if (userRole() === 'ADMIN') {
+        <a
+          class="nav-item"
+          routerLink="/admin"
+          routerLinkActive="active"
+        >
+          <i class="fa-solid fa-user-gear"></i>
+          <span>Administración</span>
+        </a>
+      }
 
     </nav>
 
@@ -75,7 +68,7 @@
 
     <a
       class="bottom-nav-item"
-      routerLink="/worker"
+      routerLink="/task-list"
       routerLinkActive="active"
     >
       <i class="fa-solid fa-chart-line"></i>
@@ -87,22 +80,24 @@
       <span>Nuevo</span>
     </button>
 
-    <a
+    <!-- <a
       class="bottom-nav-item"
       routerLink="/task-list"
       routerLinkActive="active"
     >
       <i class="fa-solid fa-list-check"></i>
       <span>Tareas</span>
-    </a>
+    </a> -->
 
-    <a
-      class="bottom-nav-item"
-      routerLink="/admin"
-      routerLinkActive="active"
-    >
-      <i class="fa-solid fa-user-gear"></i>
-      <span>Admin</span>
-    </a>
+    @if (userRole() === 'ADMIN') {
+      <a
+        class="bottom-nav-item"
+        routerLink="/admin"
+        routerLinkActive="active"
+      >
+        <i class="fa-solid fa-user-gear"></i>
+        <span>Admin</span>
+      </a>
+    }
   </nav>
 </header>
