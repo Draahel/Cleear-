@@ -13,7 +13,7 @@ import { AppAuthManagement } from '@services/app-auth-management';
 export class AppLayout {
 
   protected userName = computed(() => this.appAuthManagement.currentUser()?.fullName || '');
-  protected userRole = computed(() => this.appAuthManagement.currentUser()?.role || '');
+  protected userRole = computed(() => this.appAuthManagement.currentUser()?.role!);
 
   private readonly appAuthManagement = inject(AppAuthManagement);
 

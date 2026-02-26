@@ -19,9 +19,12 @@ export interface TaskResponse {
 export interface TaskDataResponse {
   id: string;
   title: string;
+  description:string;
   priority: Priority;
   created_at: string;
   state: State;
+  weight: number;
+  tags: string[];
   location: {
     id: string;
     name: string;

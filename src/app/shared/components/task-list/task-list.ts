@@ -1,4 +1,5 @@
 import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { Priority } from '@enums/priority';
 import { Role } from '@enums/role';
 import { SimpleTask } from '@models/simple-task.model';
@@ -15,6 +16,7 @@ type Item = SimpleTask & { class: string };
 export class TaskList {
 
   private readonly appAuthManagement = inject(AppAuthManagement);
+  private readonly router = inject(Router);
 
   tasks = input.required<SimpleTask[]>();
 
@@ -32,5 +34,9 @@ export class TaskList {
     [Priority.MEDIUM]: 'badge-medium',
     [Priority.LOW]: 'badge-low'
   };
+
+  goToTask(id:string):void {
+    this.router.navigateByUrl(`/task/${id}`)
+  }
 
 }

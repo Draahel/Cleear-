@@ -6,6 +6,7 @@ import { environment } from '@environments/environment';
 import { PaginatedTasksResponse } from '@models/paginated-tasks-response.model';
 import { TaskDataResponse, TaskResponse } from '@models/responses/simple-task-response.model';
 import { SimpleTask } from '@models/simple-task.model';
+import { Task } from '@models/task';
 import { TaskQuery } from '@models/task-query';
 import { getRelativeTime } from '@utils/date-utils';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -30,6 +31,18 @@ export class TaskInventory {
     );
   }
 
+  getById(id:string): Observable<Task | null> {
+    const { url: UrlApi, tasks } = environment.api
+    const url = `${UrlApi+tasks}/${id}`;
+    return this.http.get<TaskDataResponse>(url).pipe(
+      map( res => {
+        if (!res) return null;
+        return this.mapToTask(res)
+      }),
+      catchError(() => of(null))
+    )
+  }
+
   private mapToSimpleTask(taskDataResponse: TaskDataResponse ): SimpleTask {
     const { created_at, department, id, priority, title, state } = taskDataResponse;
     const { id: departmentId, name: departmentName } = department || {};
@@ -45,6 +58,38 @@ export class TaskInventory {
         id: departmentId,
         name: departmentName,
       }
+    })
+  }
+
+  private mapToTask(taskDataResponse: TaskDataResponse): Task {
+    const { created_at, description, department, id, priority, title, state, creator, assignee, location, weight, tags } = taskDataResponse;
+    return ({
+      id,
+      title: title || 'Titulo no disponible',
+      description,
+      state,
+      priority,
+      weight: Math.max(weight, 10),
+      tags : tags.filter( tag => !!tag ),
+      location: {
+        id: location.id,
+        name: location.name || 'Nombre no disponible',
+        type: location.type || 'Tipo no disponible',
+      },
+      assignee: {
+        id: assignee.id,
+        fullName: assignee.fullName || 'Nombre no disponible'
+      },
+      creator: {
+        id: creator.id,
+        fullName: creator.fullName || 'Nombre no disponible',
+      },
+      department: {
+        id: department.id,
+        name: department.name || 'Nombre no disponible'
+      },
+      creationDate: new Date(created_at),
+      time: getRelativeTime(created_at)
     })
   }
 

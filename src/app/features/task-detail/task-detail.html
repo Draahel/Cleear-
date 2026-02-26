@@ -1,1 +1,183 @@
-<p>task-detail works!</p>
+<div class="task-detail-container">
+  @if (isLoading()) {
+    <div class="loading-message">
+      <p>Cargando tarea...</p>
+    </div>
+  } @else if (task(); as currentTask) {
+    <div class="task-detail">
+      <!-- Header Section -->
+      <div class="task-header">
+        <div class="header-top">
+          <div class="task-id-title">
+            <span class="task-id">{{ currentTask.id }}</span>
+            <h1 class="task-title">{{ currentTask.title }}</h1>
+          </div>
+          <button class="back-btn" (click)="$event.stopPropagation()">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <div class="header-meta">
+          <span class="meta-item">
+            <i class="fa-solid fa-clock"></i>
+            <span class="meta-label">Última actualización:</span>
+            <span class="meta-value">{{ currentTask.time }}</span>
+          </span>
+          <span class="meta-divider">•</span>
+          <span class="meta-item">
+            <i class="fa-solid fa-user"></i>
+            <span class="meta-label">Actualizado por:</span>
+            <span class="meta-value">{{ currentTask.creator.fullName }}</span>
+          </span>
+        </div>
+
+        <!-- Tags -->
+        @if (currentTask.tags && currentTask.tags.length > 0) {
+          <div class="tags-container">
+            @for (tag of currentTask.tags; track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Tabs Navigation -->
+      <div class="tabs-navigation">
+        @for (tab of tabs; track tab.id) {
+          <button
+            class="tab-btn"
+            [class.active]="activeTab() === tab.id"
+            (click)="selectTab(tab.id)"
+          >
+            <i [class]="'fa-solid ' + tab.icon"></i>
+            <span>{{ tab.label }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tabs-content">
+        <!-- General Tab -->
+        @if (activeTab() === 'general') {
+          <div class="tab-panel general-panel">
+            <!-- Reported By & Assigned To Section -->
+            <div class="info-grid">
+              <div class="info-card">
+                <div class="info-header">
+                  <i class="fa-solid fa-user-pen"></i>
+                  <h3>Reportado por</h3>
+                </div>
+                <p class="info-value">{{ currentTask.creator.fullName }}</p>
+                <p class="info-secondary">ID: {{ currentTask.creator.id }}</p>
+              </div>
+
+              <div class="info-card">
+                <div class="info-header">
+                  <i class="fa-solid fa-user-check"></i>
+                  <h3>Asignado a</h3>
+                </div>
+                <p class="info-value">{{ currentTask.assignee.fullName }}</p>
+                <p class="info-secondary">ID: {{ currentTask.assignee.id }}</p>
+              </div>
+
+              <div class="info-card">
+                <div class="info-header">
+                  <i class="fa-solid fa-map-pin"></i>
+                  <h3>Ubicación</h3>
+                </div>
+                <p class="info-value">{{ currentTask.location.name }}</p>
+                <p class="info-secondary">{{ currentTask.location.type }}</p>
+              </div>
+            </div>
+
+            <!-- Status, Priority, Progress Section -->
+            <div class="status-section">
+              <div class="status-card">
+                <label>Estado</label>
+                <div
+                  class="status-badge"
+                  [style.background-color]="stateColors[currentTask.state].bg"
+                  [style.color]="stateColors[currentTask.state].text"
+                >
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span>{{ getStateLabel(currentTask.state) }}</span>
+                </div>
+              </div>
+
+              <div class="status-card">
+                <label>Prioridad</label>
+                <div
+                  class="priority-badge"
+                  [style.background-color]="priorityColors[currentTask.priority].bg"
+                  [style.color]="priorityColors[currentTask.priority].text"
+                >
+                  <i class="fa-solid fa-exclamation-triangle"></i>
+                  <span>{{ getPriorityLabel(currentTask.priority) }}</span>
+                </div>
+              </div>
+
+              <div class="status-card">
+                <label>Progreso</label>
+                <div class="progress-wrapper">
+                  <div class="progress-bar-bg">
+                    <div class="progress-fill" [style.width.%]="progress()"></div>
+                  </div>
+                  <span class="progress-text">{{ progress() }}%</span>
+                </div>
+              </div>
+
+              <div class="status-card">
+                <label>Complejidad</label>
+                <div class="complexity-indicator">
+                  <div class="complexity-bar" [style.width.%]="(currentTask.weight / 10) * 100"></div>
+                  <span class="complexity-text">{{ currentTask.weight }}/10</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description Section -->
+            <div class="description-section">
+              <h3>Descripción</h3>
+              <div class="description-content">
+                <p>{{ currentTask.description }}</p>
+              </div>
+            </div>
+          </div>
+        }
+
+        <!-- Subtasks Tab -->
+        @if (activeTab() === 'subtasks') {
+          <div class="tab-panel subtasks-panel">
+            <div class="empty-state">
+              <i class="fa-solid fa-list-check"></i>
+              <h3>Sin subtareas</h3>
+              <p>Esta tarea no tiene subtareas definidas</p>
+            </div>
+          </div>
+        }
+
+        <!-- Files Tab -->
+        @if (activeTab() === 'files') {
+          <div class="tab-panel files-panel">
+            <div class="empty-state">
+              <i class="fa-solid fa-paperclip"></i>
+              <h3>Sin archivos</h3>
+              <p>Esta tarea no tiene archivos adjuntos</p>
+            </div>
+          </div>
+        }
+
+        <!-- History Tab -->
+        @if (activeTab() === 'history') {
+          <div class="tab-panel history-panel">
+            <div class="empty-state">
+              <i class="fa-solid fa-clock"></i>
+              <h3>Sin historial</h3>
+              <p>El historial de cambios no está disponible</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>

@@ -7,7 +7,7 @@
 
   <div class="report-list">
     @for (item of items(); track item.id) {
-      <div class="report-row">
+      <div (click)="goToTask(item.id)" class="report-row">
         <div [class]="['status-indicator', item.class]"></div>
 
         <div class="report-main">
